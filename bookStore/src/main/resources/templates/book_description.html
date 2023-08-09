@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"></html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap_folder/bootstrap.css">
+    <link rel="stylesheet" href="/css/bookstyle.css">
+    <title>Book Store</title>
+    <script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
+    <script src="js/jquery.js"></script>
+    <script src="https://unpkg.com/htmlincludejs"></script>
+  </head>
+  <body>   
+    <include src="/scripts/navigation_bar_for_books.html"></include>
+    <div class="paper">
+      
+      <div class="container my-4 py-1">
+        <div class="jumbotron" style="margin-top:60px;">
+          <h2 class="display-6 page_name" style="color:black" th:text="${book.name}"></h2> 
+          <hr class="my-4">
+          </div></br></br>
+      <!--<h5 for="name"  th:text="${book.author}"></h5></br>
+      <h5 for="name" th:text="${book.genre}"></h5></br>
+      <h5 for="name" th:text="${book.description}"></h5></br>
+      <img class = "book_cover_image" th:src="${pic} == null ? _ : @{'data:image/png;base64,'+${pic}}"></br></br>-->
+      <!--<a class="btn btn-primary btn-nice" style="float: right;" th:href="@{/addBookComment/{link}/{id}(link=${book.link},id=${book.id})}">Create a comment</a>-->
+    
+      <table class="table">
+        <!--<thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>-->
+        <tbody>
+          <!--<tr>
+            <th scope="row" style="width: 15.00%">Book title</th>
+            <td colspan="5">
+              <h4 class="page_name"th:text="${book.name}"></h4>
+            </td>
+          </tr>-->
+          <tr>
+            <td class="fs-5" scope="row" style="width: 15.00%;">Author:</td>
+            <td colspan="3">
+              <p class="fs-5" for="name" th:text="${book.author}"></p>
+            </td>
+            <td rowspan="5" style="width: 5.00%"></td>
+            <td rowspan="5" style="width: 25.00%">
+              <img class="book_cover_image" th:src="${pic} == null ? _ : @{'data:image/png;base64,'+${pic}}" style="max-height: 500px; max-width: 550px;">
+              </br></br>
+              <a th:if="${book.favourites != true}" style="color:rgba(0, 0, 0, 0.377); margin-right: 30px;" th:href="@{/addToFavourites_bDescription/{link}/{id}(link=${book.link},id=${book.id})}"><i class="fa-regular fa-heart"></i></a>
+              <a th:if="${book.favourites == true}" style="color:rgba(255, 109, 170, 0.705); margin-right: 30px;" th:href="@{/deleteFromFavourites_bDescription/{link}/{id}(link=${book.link},id=${book.id})}"><i class="fa-solid fa-heart"></i></a>
+              
+              <a style="color:rgba(0, 0, 0, 0.658); margin-right: 30px;"><i class="fa-brands fa-youtube"></i></a>
+              <a th:href="@{/addQuoteComment/{link}/{id}(link=${book.link},id=${book.id})}" style="color:rgba(0, 0, 0, 0.658); margin-right: 30px;"><i class="fa-solid fa-quote-left"></i></a>
+              
+              <a th:if="${book.comment == null}" th:href="@{/addBookComment/{link}/{id}(link=${book.link},id=${book.id})}" style="color:rgba(0, 0, 0, 0.658); margin-right: 30px;"><i class="fa-solid fa-registered"></i></a>
+              <a th:if="${book.comment != null}" th:href="@{/addBookComment/{link}/{id}(link=${book.link},id=${book.id})}" style="color:rgb(0, 153, 255); margin-right: 30px;"><i class="fa-solid fa-registered"></i></a>
+            
+              <!--<a class="btn btn-sm btn-outline-dark" th:href="@{/editBook/{id}(id=${book.id})}" style="float: right;" ><i></i>Edit</a>-->
+              <a th:href="@{/editBook/{id}(id=${book.id})}" class="d-inline align-items-center"  style = "float: right;"><i class="far fa-edit me-2"></i>
+                <p class="mb-0">Edit</p>
+              </a>
+            </td>
+          </tr>
+
+        <tr>
+          <td class="fs-5" scope="row">Genre:</td>
+          <td colspan="3">
+            <p class="fs-5" for="name" th:text="${book.genre}"></p>
+          </td>
+        </tr>
+        <tr>
+          <td class="fs-5" scope="row">Rating:</td>
+          <td colspan="3">
+            <p class="fs-5" for="name" th:text="${book.price}"></p>
+            <!--
+              <i class="fa-regular fa-star" ></i>
+            
+              <i class="fa-light fa-star" style="color:rgb(197, 168, 0)"></i>
+              <i class="bi bi-star-half"></i>
+            -->
+          </td>
+        </tr>
+        <tr>
+          <td class="fs-5" scope="row">Status:</td>
+          <td colspan="3">
+            <p th:if="${book.status == 'did not read'}" style = "color:saddlebrown" class="fs-5" for="name" th:text="${book.status}"></p>
+            <p th:if="${book.status == 'want to read'}" style = "color:blueviolet" class="fs-5" for="name" th:text="${book.status}"></p>
+            <p th:if="${book.status == '...reading...'}" style = "color:steelblue" class="fs-5" for="name" th:text="${book.status}"></p>
+            <p th:if="${book.status == 'have read'}" style = "color:seagreen" class="fs-5" for="name" th:text="${book.status}"></p>
+            <p th:if="${book.status == 'love this book'}" style = "color:#e27db0" class="fs-5" for="name" th:text="${book.status}"></p>
+          </td>
+        </tr>
+          <!--<th scope="row">Description:</th>-->
+          <td colspan="3">
+            <p class="fs-6" style="white-space: pre-line;" for="name" th:text="${book.description}"></p>            
+          </td>
+
+        </tbody>
+      </table>
+      <hr class="my-4">
+
+      <!--
+        
+          <a th:if="${book.comment == null}" class="btn btn-primary btn-nice" style="float: right;" th:href="@{/addBookComment/{link}/{id}(link=${book.link},id=${book.id})}">Create a review</a>
+          <a class="btn btn-primary btn-nice" style="float: right;" th:href="@{/addQuoteComment/{link}/{id}(link=${book.link},id=${book.id})}">Add quotations</a>
+
+      -->
+
+    <!--
+      </br></br></br>
+      
+        <section> 
+          <h5 style="margin-left: 5px;">
+              Paylist  
+          </h5>
+        </section>
+      -->
+
+      <section th:if="${book.comment != null}"> 
+        </br>
+        <h5 style="margin-left: 5px;">
+            Review  
+        </h5>       
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-20 col-lg-20 col-xl-30">
+              <div class="card" style="background-color: #2269b000;">
+                <div class="card-body">
+                  <div class="d-flex flex-start align-items-center">
+                    <div>
+                      <h6 class="fw-bold text-primary mb-1 commentName" style="float: left;" th:text="${book.commentName}"></h6>
+                      <p class="text-muted small mb-0" th:text="${book.commentDate}"></p>
+                    </div>
+                  </div>
+      
+                  <div>
+                    <p class="mt-3 mb-4 pb-2" style="white-space: pre-line;" th:text="${book.comment}"></p>
+                  </div>
+                  <div class="small d-flex justify-content-start" style="float: right;">
+                    <a  th:href="@{/addBookComment/{link}/{id}(link=${book.link},id=${book.id})}" class="d-flex align-items-center me-3">
+                      <i class="far fa-edit me-2"></i>
+                      <p class="mb-0">Edit</p>
+                    </a>
+                    <a th:href="@{/deleteComment/{link}/{id}(link=${book.link},id=${book.id})}" class="d-flex align-items-center me-3">
+                      <i class="fa fa-trash me-2"></i>
+                      <p class="mb-0">Delete</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+    
+      <!--
+        <include src="/scripts/quotations.html"></include>
+      -->
+
+
+      </br>
+      <!--
+        <section>        
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-20 col-lg-20 col-xl-30">
+              <div class="card" style="background-color: #f8f9fa;">
+                <div class="card-footer py-3 border-0" >
+                  <div class="d-flex flex-start w-100">
+                    <img class="rounded-circle shadow-1-strong me-3"
+                      src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40"
+                      height="40" />
+                    <div class="form-outline w-100">
+                      <textarea class="form-control" id="textAreaExample" rows="4"
+                        style="background: #fff;"></textarea>
+                      <label class="form-label" for="textAreaExample">Message</label>
+                    </div>
+                  </div>
+                  <div class="float-end mt-2 pt-1">
+                    <button type="button" class="btn btn-primary btn-sm">Create a comment</button>
+                    <button type="button" class="btn btn-outline-primary btn-sm">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      -->
+
+      </br>
+
+      <a class="btn btn-primary" href="/available_books">Back</a> </br></br>
+
+      </div>
+    </div>
+
+    <div class="footer">
+      <include src="/scripts/bottom.html"></include>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gijgo@1.10.0/js/gijgo.min.js"></script>
+ 
+    
+    <script>
+      $(document).ready(function() {
+        $('#datepicker').datepicker({
+          uiLibrary: 'bootstrap5'
+        });
+      });
+    </script>
+  </body>
+</html>

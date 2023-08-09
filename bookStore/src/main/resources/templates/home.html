@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap_folder/bootstrap.css">
+    <script src="/css/bootstrap_folder/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="/css/bookstyle.css">
+    <title>Book Store</title>
+
+    <script src="js/jquery.js"></script>
+    <script src="https://unpkg.com/htmlincludejs"></script>
+  </head>
+
+  <body>
+    <include src="/scripts/navigation_bar.html"></include>
+    <div class="paper">
+
+      <div class="jumbotron " style="margin-left: 40px; margin-top: 70px; margin-right: 40px;">
+        <h2 class="display-4" style="color: black; display: inline-block;">Welcome back!</h2>
+        <!--<a class="btn btn-outline-primary btn-lg" href="login" role="button" style="display: inline-block;">Log In</a>-->
+        <hr class="my-4">
+        <p class="lead">
+          Explore your Book Collection! Discover books waiting to be read, in progress, or already enjoyed. Dive into each book's page to add reviews, favourite quotations and create playlists. You can also change the status and raiting of the book and add it to your favorites collection. Embark on a literary adventure and find your next great read! Happy exploring!
+        </p>
+        </br>
+      </div>
+      <div class="home-buttons" style = "background-color: rgba(255, 255, 255, 0.281); ">
+        <div style="margin-left: 40px; margin-right: 40px;  display: flex; justify-content: space-between; padding: 10px; ">
+          <a class="btn btn-outline-dark btn-lg" style="display: inline-block;" href="/available_books" role="button">Book List</a>
+          <a class="btn btn-outline-dark btn-lg" style="display: inline-block;" href="/my_books" role="button">Favourite</a>
+          <a class="btn btn-outline-dark btn-lg" style="display: inline-block;" href="/read_books" role="button">Have Read</a>
+          <a class="btn btn-outline-dark btn-lg" style="display: inline-block;" href="/book_register" role="button">Register New</a>
+          <a class="btn btn-outline-dark btn-lg" style="display: inline-block;" href="/my_profile" role="button">My Profile</a>
+          <a class="btn btn-outline-dark btn-lg" style="display: inline-block;" href="/welcome" role="button">Log Out</a>
+        </div>
+      </div>
+        
+        <div class="jumbotron " style="margin-left: 20px; margin-top: 50px; margin-right: 25px;">
+        <table class="table" >
+          <tbody>           
+            <tr >
+              <td class="fs-4 text-center" scope="row" style="width: 15.00%;" >Recently added</td>
+              <td class="fs-4 text-center" scope="row" style="width: 15.00%;">Favourites</td>
+              <td class="fs-4 text-center" scope="row" style="width: 15.00%;">Recently read</td>
+            </tr>            
+          </tbody>
+        </table>
+        </div>        
+
+
+        <div class="carousel-container" style="display: inline-block; margin-left: 50px;">
+        <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" style="width: 300px">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          </div>      
+          <div class="carousel-inner">
+            <div class="carousel-item active c-item">
+              <a th:href="@{/bookDescription/{link}/{id}(link=${lastBook1.link},id=${lastBook1.id})}">
+              <!--<img src="https://img3.labirint.ru/rc/b0ccd9bb0ea9700b8499e52320f49621/363x561q80/books63/626201/cover.jpg?1617110726" class="d-block w-100 c-img" alt="Slide 1">-->
+              <img alt="Slide 1" class="rounded-3 home-carousel" th:src="${picb1} == null ? _ : @{'data:image/png;base64,'+${picb1}}">
+
+              <!--<div class="carousel-caption top-0 mt-4" style="color:black;">                
+                <p class="mb-1 fs-5 text-center" th:text="${lastBook1.name}" style="margin-top: 20px;"></p>
+                <p class="mb-1 lead small text-center" th:text="${lastBook1.author}"></p>
+                <h1 class="display-1 fw-bolder text-capitalize" style="color:white; margin-top: 125px;">1</h1>
+              </div>-->
+            </a>
+            </div>
+            <div class="carousel-item c-item">
+              <a th:href="@{/bookDescription/{link}/{id}(link=${lastBook2.link},id=${lastBook2.id})}">
+                <img alt="Slide 2" class="rounded-3 home-carousel" th:src="${picb2} == null ? _ : @{'data:image/png;base64,'+${picb2}}">
+                <!--<div class="carousel-caption top-0 mt-4" style="color:black;">                
+                  <p class="mb-1 fs-5 text-center" th:text="${lastBook2.name}" style="margin-top: 20px;"></p>
+                  <p class="mb-1 lead small text-center" th:text="${lastBook2.author}"></p>                            
+                </div>-->
+            </a>
+            </div>
+            <div class="carousel-item c-item">
+              <a th:href="@{/bookDescription/{link}/{id}(link=${lastBook3.link},id=${lastBook3.id})}">
+                <img alt="Slide 3" class="rounded-3 home-carousel" th:src="${picb3} == null ? _ : @{'data:image/png;base64,'+${picb3}}">
+                <!--<div class="carousel-caption top-0 mt-4" style="color:black;">                
+                  <p class="mb-1 fs-5 text-center" th:text="${lastBook3.name}" style="margin-top: 20px;"></p>
+                  <p class="mb-1 lead small text-center" th:text="${lastBook3.author}"></p>                            
+                </div>-->
+            </a>
+            </div>                  
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>   
+      </div>
+
+
+      
+      <div class="carousel-container" style="display: inline-block; margin-left: 50px;">
+        <div id="hero-carousel1" class="carousel slide" data-bs-ride="carousel" style="width: 300px;">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#hero-carousel1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#hero-carousel1" data-bs-slide-to="1" aria-label="Slide 5"></button>
+            <button type="button" data-bs-target="#hero-carousel1" data-bs-slide-to="2" aria-label="Slide 6"></button>
+          </div>
+      
+          <div class="carousel-inner">
+            <div class="carousel-item active c-item">
+              <a th:href="@{/bookDescription/{link}/{id}(link=${favouriteBook1.link},id=${favouriteBook1.id})}">
+              <!--<img src="https://img3.labirint.ru/rc/b0ccd9bb0ea9700b8499e52320f49621/363x561q80/books63/626201/cover.jpg?1617110726" class="d-block w-100 c-img" alt="Slide 1">-->
+              <img alt="Slide 1" class="w-100 rounded-3 home-carousel" th:src="${fpicb1} == null ? _ : @{'data:image/png;base64,'+${fpicb1}}">
+              <!--<div class="carousel-caption top-0 mt-4" style="color:black;">                
+                <p class="mb-1 fs-5 text-center" th:text="${favouriteBook1.name}" style="margin-top: 20px;"></p>
+                <p class="mb-1 lead small text-center" th:text="${favouriteBook1.author}"></p>
+                <h1 class="display-1 fw-bolder text-capitalize" style="color:white; margin-top: 125px;">1</h1>
+              </div>-->
+            </a>
+            </div>
+            <div class="carousel-item c-item">
+              <a th:href="@{/bookDescription/{link}/{id}(link=${favouriteBook2.link},id=${favouriteBook2.id})}">
+                <img alt="Slide 2" class="w-100 rounded-3 home-carousel" th:src="${fpicb2} == null ? _ : @{'data:image/png;base64,'+${fpicb2}}">
+                <!--<div class="carousel-caption top-0 mt-4" style="color:black;">                
+                  <p class="mb-1 fs-5 text-center" th:text="${favouriteBook2.name}" style="margin-top: 20px;"></p>
+                  <p class="mb-1 lead small text-center" th:text="${favouriteBook2.author}"></p>                            
+                </div>-->
+            </a>
+            </div>
+            <div class="carousel-item c-item">
+              <a th:href="@{/bookDescription/{link}/{id}(link=${favouriteBook3.link},id=${favouriteBook3.id})}">
+                <img alt="Slide 3" class=" w-100 rounded-3 home-carousel" th:src="${fpicb3} == null ? _ : @{'data:image/png;base64,'+${fpicb3}}">
+                <!--<div class="carousel-caption top-0 mt-4" style="color:black;">                
+                  <p class="mb-1 fs-5 text-center" th:text="${favouriteBook3.name}" style="margin-top: 20px;"></p>
+                  <p class="mb-1 lead small text-center" th:text="${favouriteBook3.author}"></p>                            
+                </div>-->
+              </a>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel1" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel1" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>   
+      </div>
+
+
+      <div class="carousel-container" style="display: inline-block; margin-left: 50px;">
+        <div id="hero-carousel2" class="carousel slide" data-bs-ride="carousel" style="width: 300px">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#hero-carousel2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#hero-carousel2" data-bs-slide-to="1" aria-label="Slide 5"></button>
+            <button type="button" data-bs-target="#hero-carousel2" data-bs-slide-to="2" aria-label="Slide 6"></button>
+          </div>
+      
+          <div class="carousel-inner">
+            <div class="carousel-item active c-item">
+              <a th:href="@{/bookDescription/{link}/{id}(link=${readBook1.link},id=${readBook1.id})}">
+              <!--<img src="https://img3.labirint.ru/rc/b0ccd9bb0ea9700b8499e52320f49621/363x561q80/books63/626201/cover.jpg?1617110726" class="d-block w-100 c-img" alt="Slide 1">-->
+              <img alt="Slide 1" class="w-100 rounded-3 home-carousel" th:src="${rpicb1} == null ? _ : @{'data:image/png;base64,'+${rpicb1}}">
+
+              <!--<div class="carousel-caption top-0 mt-4" style="color:black;">                
+                <p class="mb-1 fs-5 text-center" th:text="${readBook1.name}" style="margin-top: 20px;"></p>
+                <p class="mb-1 lead small text-center" th:text="${readBook1.author}"></p>
+                <h1 class="display-1 fw-bolder text-capitalize" style="color:white; margin-top: 125px;">1</h1>
+              </div>-->
+            </a>
+            </div>
+            <div class="carousel-item c-item">
+              <a th:href="@{/bookDescription/{link}/{id}(link=${readBook2.link},id=${readBook2.id})}">
+                <img alt="Slide 2" class="w-100 rounded-3 home-carousel" th:src="${rpicb2} == null ? _ : @{'data:image/png;base64,'+${rpicb2}}">
+                <!--<div class="carousel-caption top-0 mt-4" style="color:black;">                
+                  <p class="mb-1 fs-5 text-center" th:text="${readBook2.name}" style="margin-top: 20px;"></p>
+                  <p class="mb-1 lead small text-center" th:text="${readBook2.author}"></p>                            
+                </div>-->
+            </a>
+            </div>
+            <div class="carousel-item c-item">
+              <a th:href="@{/bookDescription/{link}/{id}(link=${readBook3.link},id=${readBook3.id})}">
+                <img alt="Slide 3" class="w-100 rounded-3 home-carousel" th:src="${rpicb3} == null ? _ : @{'data:image/png;base64,'+${rpicb3}}">
+                <!--<div class="carousel-caption top-0 mt-4" style="color:black;">                
+                  <p class="mb-1 fs-5 text-center" th:text="${readBook3.name}" style="margin-top: 20px;"></p>
+                  <p class="mb-1 lead small text-center" th:text="${readBook3.author}"></p>                            
+                </div>-->
+              </a>
+            </div>
+          </div>
+
+          <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel2" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel2" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>      
+        </div>   
+
+      </div>
+      
+    <div class="jumbotron " style="margin-left: 40px; margin-top: 20px; margin-right: 40px;">
+      </br>
+      <hr class="my-4">
+    </div>
+
+    </div>
+   <div class="footer">
+    <include src="/scripts/bottom.html"></include>
+  </div>
+
+   
+
+
+   
+    <!--<img src="/images/bg.png" width="360px"/>
+    Nasza wypożyczalnia książek zaprasza Cię do fascynującej podróży, gdzie każde kliknięcie otworzy drzwi do niesamowitych przygód i niezapomnianych emocji.-->
+      
+      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    
+  </body>
+</html>
