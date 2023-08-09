@@ -51,5 +51,4 @@ This project offers a range of functionalities. Here is the sequence in which ac
 
 ### Video
 
-[<img src="https://github.com/lisajankk/personal_journal2/assets/124843836/af35b5d0-9bc6-475a-ab87-2cf50c042fa3" width="70%">](https://youtu.be/ooWxca4_tt4)
-
+[<img src="https://i.ytimg.com/vi/ooWxca4_tt4/maxresdefault.jpg" width="85%">](https://www.youtube.com/embed/ooWxca4_tt4)
