@@ -51,4 +51,4 @@ This project offers a range of functionalities. Here is the sequence in which ac
 
 ### Video
 
-[<img src="https://i.ytimg.com/vi/ooWxca4_tt4/maxresdefault.jpg" width="85%">](https://www.youtube.com/embed/ooWxca4_tt4)
+[<img src="https://i.ytimg.com/vi/ooWxca4_tt4/maxresdefault.jpg" width="100%">](https://www.youtube.com/embed/ooWxca4_tt4)
